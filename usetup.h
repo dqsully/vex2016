@@ -54,10 +54,16 @@ static fMotors_t fMotors[kVexMotorNum] = {
   {kVexMotor_10, kVexMotorUndefined, kVexMotorNormal,   kVexSensorNone,        0} // Broken
 };
 
+// External User Values
+extern bool armLock, liftLock;
+
 /* User-defined setup
   The digital motor ports can (and should) be configured here.
     */
 void vexUserSetup() {
   vexDigitalConfigure(fDigital, DIG_CONFIG_SIZE(fDigital));
   vexMotorConfigure(fMotors, MOT_CONFIG_SIZE(fMotors));
+
+  vexDigitalPinSet(kArmLock, armLock);
+  vexDigitalPinSet(kLiftLock, liftLock);
 }

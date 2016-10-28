@@ -45,6 +45,8 @@ float fl, fr, bl, br, max, nml;
 bool enableCurve = 1, armLock = 1, armLockP, liftLock = 1, liftLockP;
 Motor_t rArmMotors[] = { kArmL0, kArmL1, kArmR0, kArmR1 };
 
+#include "usetup.h"    // Setup functions
+// (let usetup.h access global variables)
 
 /* User-defined initialization
 This function is called after all setup is complete and communication has been

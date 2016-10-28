@@ -9,4 +9,4 @@
 #include "aliases.h"   // custom aliases
 #include "usettings.h" // preprocessor numbers and shtuff
 #include "ulib.h"      // preprocessor functions
-#include "usetup.h"    // Setup functions
+// #include "usetup.h"    // Setup functions
