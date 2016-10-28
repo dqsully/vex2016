@@ -37,13 +37,23 @@
 
 #include "vexuser.h"
 
-/* User-defined initialization
-  This function is called after all setup is complete and communication has been
-  established with the master processor. Start other tasks and initialize user
-  variables here.
-    */
-void vexUserInit() {
+//-------------------------------Initialization-------------------------------//
+int16_t x, y, r, arm;
+int i;
+float fl, fr, bl, br, max, nml;
 
+bool enableCurve = 1, armLock = 1, armLockP, liftLock = 1, liftLockP;
+Motor_t rArmMotors[] = { kArmL0, kArmL1, kArmR0, kArmR1 };
+
+
+/* User-defined initialization
+This function is called after all setup is complete and communication has been
+established with the master processor. Start other tasks and initialize user
+variables here.
+*/
+void vexUserInit() {
+  vexDigitalPinSet(kArmLock, armLock);
+  vexDigitalPinSet(kLiftLock, liftLock);
 }
 
 /* Autonomous control
@@ -68,24 +78,27 @@ msg_t vexOperator(void *arg) {
   (void)arg;
   vexTaskRegister("operator"); // must be called for competition
 
-  // driving variables
-  int16_t x, y, r;
-  float fl, fr, bl, br, max, nml;
-
-  bool enableCurve;
-
-
   while(!chThdShouldTerminate()) {
-    // Get joystick values
+    //-------------------------Controller Inputs--------------------------//
+    // Driving
     x = vexControllerGet(Ch4);
     y = vexControllerGet(Ch3);
     r = vexControllerGet(Ch1);
 
-    // Detect if curve should be enabled
-    if(vexControllerGet(Btn6U) == 1) enableCurve = 1;
-    else if(vexControllerGet(Btn5U)) enableCurve = 0;
+    // Exponential Curve
+    if(vexControllerGet(Btn6U)) enableCurve = 1;
+    else if(vexControllerGet(Btn6D)) enableCurve = 0;
 
-    vexLcdPrintf(0, 0, "%d", x);
+    // Arm
+    arm = vexControllerGet(Ch2Xmtr2);
+    if(vexControllerGet(Btn6DXmtr2)) armLock = 0;
+    else if(vexControllerGet(Btn6UXmtr2)) armLock = 1;
+    if(vexControllerGet(Btn5DXmtr2)) liftLock = 0;
+    else if(vexControllerGet(Btn5UXmtr2)) liftLock = 1;
+
+
+    //-------------------------Controller Mapping-------------------------//
+    vexLcdPrintf(0, 0, "%d", enableCurve);
 
     if(enableCurve) {
       // Map controller inputs exponentially
@@ -94,6 +107,26 @@ msg_t vexOperator(void *arg) {
       r = kMapControllerInput(r);
     }
 
+    //--------------------------------Arm---------------------------------//
+    // Run Arm
+    for(i=0; i<4; i++) {
+      vexMotorSet(rArmMotors[i], arm);
+    }
+
+    // Set arm lock
+    if(armLock != armLockP) {
+      armLockP = armLock;
+      vexDigitalPinSet(kArmLock, armLock);
+    }
+
+    // Set lift lock
+    if(liftLock != liftLockP) {
+      liftLockP = liftLock;
+      vexDigitalPinSet(kLiftLock, liftLock);
+    }
+
+
+    //------------------------------Driving-------------------------------//
     // Calculate raw wheel powers
     fl = y + x + r;
     fr = y - x - r;
@@ -115,6 +148,9 @@ msg_t vexOperator(void *arg) {
     vexMotorSet(kDriveFR, (int16_t)(fr * nml));
     vexMotorSet(kDriveBL, (int16_t)(bl * nml));
     vexMotorSet(kDriveBR, (int16_t)(br * nml));
+
+
+    //--------------------------------------------------------------------//
 
     vexSleep(25); // must be called, even if for no time
   }
