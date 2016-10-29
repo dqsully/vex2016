@@ -45,7 +45,17 @@ float fl, fr, bl, br, max, nml;
 bool enableCurve = 1, armLock = 1, armLockP, liftLock = 1, liftLockP;
 Motor_t rArmMotors[] = { kArmL0, kArmL1, kArmR0, kArmR1 };
 
-#include "usetup.h"    // Setup functions
+/* User-defined setup
+  The digital motor ports can (and should) be configured here.
+    */
+void vexUserSetup() {
+  vexDigitalConfigure(fDigital, DIG_CONFIG_SIZE(fDigital));
+  vexMotorConfigure(fMotors, MOT_CONFIG_SIZE(fMotors));
+
+  vexDigitalPinSet(kArmLock, armLock);
+  vexDigitalPinSet(kLiftLock, liftLock);
+}
+
 // (let usetup.h access global variables)
 
 /* User-defined initialization
