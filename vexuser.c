@@ -93,9 +93,9 @@ msg_t vexOperator(void *arg) {
   while(!chThdShouldTerminate()) {
     //-------------------------Controller Inputs--------------------------//
     // Driving
-    x = vexControllerGet(Ch4);
-    y = vexControllerGet(Ch3);
-    r = vexControllerGet(Ch1);
+    x = vexControllerGet(Ch1);
+    y = vexControllerGet(Ch2);
+    r = vexControllerGet(Ch4);
 
     // Exponential Curve
     if(vexControllerGet(Btn6U)) enableCurve = 1;
@@ -122,7 +122,7 @@ msg_t vexOperator(void *arg) {
     //--------------------------------Arm---------------------------------//
     // Run Arm
     for(i=0; i<4; i++) {
-      vexMotorSet(rArmMotors[i], arm);
+      vexMotorSet(rArmMotors[i], kMapControllerInput(arm));
     }
 
     // Set arm lock
