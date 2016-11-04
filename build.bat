@@ -1,1 +1,1 @@
-bash -c make all
+bash -c "make all"
