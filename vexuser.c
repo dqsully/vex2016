@@ -17,7 +17,7 @@
     fX    :=  X is for configuration
     mXY  :=  array of Y's indexed by X (read as "map from X to Y")
     rX   :=  array of X's indexed by the number iX (read as "range X")
-    iX    :=  index of the array rgX
+    iX    :=  index of the array rX
     bX    :=  relative offset to an X
     XFirst:=  the first X in a set
     XLast :=  the last X in a set

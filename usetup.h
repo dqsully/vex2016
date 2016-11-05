@@ -1,7 +1,3 @@
-#include "ch.h"
-#include "hal.h"
-#include "vex.h"
-
 #include "aliases.h"
 
 // Named motor ports
