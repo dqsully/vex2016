@@ -146,10 +146,7 @@ msg_t vexOperator(void *arg) {
     br = y + x - r;
 
     // Get maximum absolute value of wheel powers
-    max = abs(fl);
-    if(abs(fl) > max) max = abs(fr);
-    if(abs(bl) > max) max = abs(bl);
-    if(abs(br) > max) max = abs(br);
+    max = abs(x) + abs(y) + abs(r);
 
     // Get ratio of greatest wheel power to max power
     if(max > 127) nml = 127.0 / max;
