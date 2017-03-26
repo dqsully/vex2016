@@ -1,0 +1,38 @@
+commands: [
+  {
+    name: 'pros-compile'
+    command: 'bash'
+    arguments: [
+      '-c',
+      'make'
+    ]
+    matchs: [
+      "^(?<file>[\\/0-9a-zA-Z\\._\\\\]+):(?<line>\\d+):(?<col>\\d+):"
+    ]
+    options:
+      cwd: '{ProjectDir}'
+      keymap: 'alt-shift-B'
+  }
+  {
+    name: 'pros-clean'
+    command: 'bash'
+    arguments: [
+      '-c',
+      'make clean'
+    ]
+    options:
+      cwd: '{ProjectDir}'
+      keymap: 'alt-shift-C'
+  }
+  {
+    name: 'pros-flash'
+    command: '..\\ConVEX\\Flasher\\cortexflash.exe'
+    arguments: [
+      'bin\\output.bin'
+      'COM5'
+    ]
+    options:
+      cwd: '{ProjectDir}'
+      keymap: 'alt-shift-F'
+  }
+]

@@ -1,8 +1,0 @@
-{
-  "execPath": "gcc.exe",
-  "gccDefaultCFlags": "-c -Wall -std=c99",
-  "gccDefaultCppFlags": "-c -Wall -std=c++11",
-  "gccErrorLimit": 15,
-  "gccIncludePaths": ".,../../../../ChibiOS_2.6.2/os/ports/common/ARMCMx/CMSIS/include,../../../../ChibiOS_2.6.2/os/ports/common/ARMCMx,../../../../ChibiOS_2.6.2/os/ports/GCC/ARMCMx,../../../../ChibiOS_2.6.2/os/ports/GCC/ARMCMx/STM32F1xx,../../../../ChibiOS_2.6.2/os/kernel/include,../../../../ChibiOS_2.6.2/os/hal/include,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32F1xx,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32/GPIOv1,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32/I2Cv1,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32/RTCv1,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32/SPIv1,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32/TIMv1,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32/USARTv1,../../../../ChibiOS_2.6.2/os/hal/platforms/STM32/USBv1,../../boards/VEX_STM32_CORTEX,../../../../ChibiOS_2.6.2/os/various,../../fw,../../opt",
-  "gccSuppressWarnings": false
-}

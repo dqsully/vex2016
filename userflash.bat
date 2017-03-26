@@ -1,2 +1,0 @@
-call flash.bat
-pause
